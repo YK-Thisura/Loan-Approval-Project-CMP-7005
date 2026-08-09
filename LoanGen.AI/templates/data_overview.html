@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Data Overview — LoanGen AI{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-head">
+    <span class="eyebrow">● Training Dataset</span>
+    <h1>What the models learned from.</h1>
+    <p>A cleaned, 20,000-record historical loan dataset spanning 2018–2025, used to train both the Logistic Regression and Decision Tree models.</p>
+  </div>
+
+  <div id="statGrid" class="stat-grid">
+    <div class="stat-card"><div class="num">—</div><div class="label">Total Records</div></div>
+    <div class="stat-card"><div class="num">—</div><div class="label">Features</div></div>
+    <div class="stat-card"><div class="num">—</div><div class="label">Approval Rate</div></div>
+    <div class="stat-card"><div class="num">—</div><div class="label">Missing Values</div></div>
+  </div>
+
+  <div class="overview-split">
+    <div class="panel-card">
+      <h3>Approval Distribution</h3>
+      <div class="approval-donut-wrap">
+        <canvas id="donutChart" width="160" height="160"></canvas>
+        <div class="donut-legend" id="donutLegend"></div>
+      </div>
+    </div>
+
+    <div class="panel-card">
+      <h3>Dataset Snapshot</h3>
+      <div id="snapshotList" style="display:flex; flex-direction:column; gap:14px; font-size:14px;">
+        <div class="loading-row" style="padding:20px 0;"><span class="spin"></span> Loading…</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-card" style="margin-bottom:24px;">
+    <h3>All Columns (35)</h3>
+    <div id="colList" class="col-list">
+      <div class="loading-row"><span class="spin"></span> Loading columns…</div>
+    </div>
+  </div>
+
+  <div class="panel-card">
+    <h3>Sample Records</h3>
+    <div class="table-wrap">
+      <table class="data-table" id="sampleTable">
+        <thead><tr><th colspan="6">Loading sample rows…</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="height:80px;"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/vendor/chart.umd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/data_overview.js') }}"></script>
+{% endblock %}
