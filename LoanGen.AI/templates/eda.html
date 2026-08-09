@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}EDA — LoanGen AI{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-head">
+    <span class="eyebrow">● Exploratory Data Analysis</span>
+    <h1>What drives approval.</h1>
+    <p>A visual breakdown of the training data — how approval rates shift by applicant category, which features distinguish approved vs. rejected applicants, and how strongly each feature correlates with the outcome.</p>
+  </div>
+
+  <div class="eda-grid" style="margin-top:40px;">
+    <div class="chart-card">
+      <h3>Approval Rate by Employment Status</h3>
+      <div class="desc">Share of applicants approved, grouped by employment type</div>
+      <canvas id="chart-EmploymentStatus"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3>Approval Rate by Education Level</h3>
+      <div class="desc">Higher education levels shown left to right</div>
+      <canvas id="chart-EducationLevel"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3>Approval Rate by Home Ownership</h3>
+      <div class="desc">Renters vs. owners vs. mortgage holders</div>
+      <canvas id="chart-HomeOwnershipStatus"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3>Approval Rate by Loan Purpose</h3>
+      <div class="desc">What the loan is for vs. likelihood of approval</div>
+      <canvas id="chart-LoanPurpose"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-card" style="margin-bottom:20px;">
+    <h3>Approval Rate by Marital Status</h3>
+    <div class="desc">Full-width view across all marital status categories</div>
+    <canvas id="chart-MaritalStatus" style="max-height:220px;"></canvas>
+  </div>
+
+  <div class="chart-card" style="margin-bottom:20px;">
+    <h3>Feature Distribution — Approved vs. Rejected</h3>
+    <div class="desc">Select a feature to compare its distribution across outcomes</div>
+    <div class="eda-tabs" id="histTabs"></div>
+    <canvas id="histChart" style="max-height:320px; margin-top:12px;"></canvas>
+  </div>
+
+  <div class="eda-grid">
+    <div class="chart-card">
+      <h3>Correlation with Loan Approval</h3>
+      <div class="desc">Strongest linear relationships (Pearson r), positive and negative</div>
+      <canvas id="corrChart" style="max-height:340px;"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3>Credit Score vs. Risk Score</h3>
+      <div class="desc">600-point sample, colored by outcome</div>
+      <canvas id="scatterChart" style="max-height:340px;"></canvas>
+    </div>
+  </div>
+
+  <div style="height:80px;"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/vendor/chart.umd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/eda.js') }}"></script>
+{% endblock %}
