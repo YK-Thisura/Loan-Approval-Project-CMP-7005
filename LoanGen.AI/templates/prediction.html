@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}Prediction — LoanGen AI{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-head">
+    <span class="eyebrow">● Prediction Engine</span>
+    <h1>Check a loan application.</h1>
+    <p>Choose a model, fill in the applicant's financial profile, and get an instant approval probability.</p>
+  </div>
+
+  <div class="model-select" id="modelSelect">
+    <div class="model-card selected" data-model="logistic">
+      <span class="tag">Model A</span>
+      <h3>Logistic Regression</h3>
+      <p>Probability-calibrated linear classifier, trained on SMOTE-balanced data with 41 features.</p>
+    </div>
+    <div class="model-card" data-model="tree">
+      <span class="tag">Model B</span>
+      <h3>Decision Tree</h3>
+      <p>Rule-based classifier (max depth 8) that splits applicants the way an underwriter would.</p>
+    </div>
+  </div>
+
+  <form id="predictForm" class="predict-layout" novalidate>
+    <div class="form-panel">
+      <h3>Financial &amp; Credit Profile</h3>
+      <div class="field-grid">
+        {% for field, label, unit, min_v, max_v in numeric_fields %}
+        <div class="field">
+          <label for="f_{{ field }}">{{ label }}{% if unit %} <span style="color:var(--text-faint)">({{ unit }})</span>{% endif %}</label>
+          <input type="number" step="any" id="f_{{ field }}" name="{{ field }}" min="{{ min_v }}" max="{{ max_v }}" placeholder="{{ min_v }} – {{ max_v }}" required>
+        </div>
+        {% endfor %}
+      </div>
+
+      <h3 class="second">Applicant Details</h3>
+      <div class="field-grid">
+        {% for cat_field, options in categorical_fields.items() %}
+        <div class="field">
+          <label for="c_{{ cat_field }}">{{ cat_field }}</label>
+          <select id="c_{{ cat_field }}" name="{{ cat_field }}">
+            {% for opt in options %}
+            <option value="{{ opt }}">{{ opt }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="btn btn-primary" id="submitBtn">Predict Approval →</button>
+      </div>
+    </div>
+
+    <aside class="result-panel">
+      <h3>Result</h3>
+      <div id="resultEmpty" class="result-empty">
+        Fill in the form and click <strong style="color:var(--text-dim)">Predict Approval</strong> to see the model's verdict here.
+      </div>
+
+      <div id="resultBody" style="display:none;">
+        <div class="gauge-wrap">
+          <svg viewBox="0 0 220 130">
+            <path d="M15 115 A95 95 0 0 1 205 115" stroke="#2a2a2a" stroke-width="16" stroke-linecap="round" fill="none"/>
+            <path id="gaugeArc" d="M15 115 A95 95 0 0 1 205 115" stroke="#22F89F" stroke-width="16" stroke-linecap="round" fill="none"
+                  stroke-dasharray="298" stroke-dashoffset="298"/>
+          </svg>
+          <div class="gauge-value">
+            <div class="pct" id="gaugePct">0%</div>
+            <div class="sub">APPROVAL PROBABILITY</div>
+          </div>
+        </div>
+
+        <div id="verdictBadge" class="verdict-badge">— PENDING —</div>
+
+        <div class="result-meta">
+          <span>Model used</span>
+          <span id="metaModel">—</span>
+        </div>
+        <div class="result-meta">
+          <span>Raw probability</span>
+          <span id="metaProb">—</span>
+        </div>
+      </div>
+    </aside>
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/prediction.js') }}"></script>
+{% endblock %}
