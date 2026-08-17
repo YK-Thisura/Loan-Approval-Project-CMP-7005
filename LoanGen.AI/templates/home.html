@@ -1,16 +1,27 @@
-{% extends "base.html" %}
-{% block title %}LoanGen AI — Instant Loan Approval Intelligence{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}LoanGen AI — Instant Loan Approval
+Intelligence{% endblock %} {% block content %}
 <div class="container">
   <section class="hero">
     <div class="hero-copy">
       <span class="eyebrow">● Two Models · One Decision</span>
-      <h1>Know your loan odds<br>before the bank does<span class="accent">.</span></h1>
-      <p>LoanGen AI runs your application through a trained Logistic Regression model and a Decision Tree classifier side by side — giving you a real approval probability in under a second, backed by 20,000 historical loan records.</p>
+      <h1>
+        Know your loan odds<br />before the bank does<span class="accent"
+          >.</span
+        >
+      </h1>
+      <p>
+        LoanGen AI runs your application through a trained Logistic Regression
+        model and a Decision Tree classifier side by side giving you a real
+        approval probability in under a second, backed by 20,000 historical loan
+        records.
+      </p>
       <div class="hero-actions">
-        <a href="{{ url_for('prediction') }}" class="btn btn-primary">Run a Prediction →</a>
-        <a href="{{ url_for('data_overview') }}" class="btn btn-ghost">Learn More</a>
+        <a href="{{ url_for('prediction') }}" class="btn btn-primary"
+          >Run a Prediction →</a
+        >
+        <a href="{{ url_for('data_overview') }}" class="btn btn-ghost"
+          >Learn More</a
+        >
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
@@ -30,38 +41,135 @@
 
     <div class="hero-visual">
       <svg viewBox="0 0 480 460" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="240" cy="230" r="190" stroke="#474747" stroke-width="1" stroke-dasharray="2 6" opacity="0.5"/>
-        <circle cx="240" cy="230" r="150" stroke="#474747" stroke-width="1" opacity="0.4"/>
+        <circle
+          cx="240"
+          cy="230"
+          r="190"
+          stroke="#474747"
+          stroke-width="1"
+          stroke-dasharray="2 6"
+          opacity="0.5"
+        />
+        <circle
+          cx="240"
+          cy="230"
+          r="150"
+          stroke="#474747"
+          stroke-width="1"
+          opacity="0.4"
+        />
 
         <!-- gauge arc -->
-        <path d="M110 300 A150 150 0 1 1 370 300" stroke="#2a2a2a" stroke-width="18" stroke-linecap="round"/>
-        <path d="M110 300 A150 150 0 0 1 320 122" stroke="#22F89F" stroke-width="18" stroke-linecap="round"/>
-        <circle cx="320" cy="122" r="9" fill="#22F89F"/>
+        <path
+          d="M110 300 A150 150 0 1 1 370 300"
+          stroke="#2a2a2a"
+          stroke-width="18"
+          stroke-linecap="round"
+        />
+        <path
+          d="M110 300 A150 150 0 0 1 320 122"
+          stroke="#22F89F"
+          stroke-width="18"
+          stroke-linecap="round"
+        />
+        <circle cx="320" cy="122" r="9" fill="#22F89F" />
 
-        <text x="240" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="52" font-weight="700" fill="#EDEDED">92%</text>
-        <text x="240" y="252" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" letter-spacing="2" fill="#6f6f6f">APPROVAL LIKELIHOOD</text>
+        <text
+          x="240"
+          y="222"
+          text-anchor="middle"
+          font-family="JetBrains Mono, monospace"
+          font-size="52"
+          font-weight="700"
+          fill="#EDEDED"
+        >
+          92%
+        </text>
+        <text
+          x="240"
+          y="252"
+          text-anchor="middle"
+          font-family="Inter, sans-serif"
+          font-size="13"
+          letter-spacing="2"
+          fill="#6f6f6f"
+        >
+          APPROVAL LIKELIHOOD
+        </text>
 
         <!-- orbiting data nodes -->
-        <g font-family="JetBrains Mono, monospace" font-size="11" fill="#a6a6a6">
-          <circle cx="80" cy="150" r="4" fill="#22F89F"/>
-          <line x1="84" y1="150" x2="130" y2="150" stroke="#474747" stroke-width="1"/>
+        <g
+          font-family="JetBrains Mono, monospace"
+          font-size="11"
+          fill="#a6a6a6"
+        >
+          <circle cx="80" cy="150" r="4" fill="#22F89F" />
+          <line
+            x1="84"
+            y1="150"
+            x2="130"
+            y2="150"
+            stroke="#474747"
+            stroke-width="1"
+          />
           <text x="134" y="154">Credit Score 700</text>
 
-          <circle cx="400" cy="200" r="4" fill="#22F89F"/>
-          <line x1="396" y1="200" x2="360" y2="200" stroke="#474747" stroke-width="1"/>
+          <circle cx="400" cy="200" r="4" fill="#22F89F" />
+          <line
+            x1="396"
+            y1="200"
+            x2="360"
+            y2="200"
+            stroke="#474747"
+            stroke-width="1"
+          />
           <text x="264" y="204">Risk 35</text>
 
-          <circle cx="70" cy="330" r="4" fill="#474747"/>
-          <line x1="74" y1="330" x2="120" y2="330" stroke="#474747" stroke-width="1"/>
+          <circle cx="70" cy="330" r="4" fill="#474747" />
+          <line
+            x1="74"
+            y1="330"
+            x2="120"
+            y2="330"
+            stroke="#474747"
+            stroke-width="1"
+          />
           <text x="124" y="334">DTI 13.7%</text>
 
-          <circle cx="410" cy="340" r="4" fill="#474747"/>
-          <line x1="406" y1="340" x2="366" y2="340" stroke="#474747" stroke-width="1"/>
+          <circle cx="410" cy="340" r="4" fill="#474747" />
+          <line
+            x1="406"
+            y1="340"
+            x2="366"
+            y2="340"
+            stroke="#474747"
+            stroke-width="1"
+          />
           <text x="278" y="344">Net Worth $800K</text>
         </g>
 
-        <rect x="170" y="400" width="140" height="34" rx="17" fill="#22F89F" opacity="0.12" stroke="#22F89F" stroke-width="1"/>
-        <text x="240" y="422" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="700" font-size="13" fill="#22F89F">✓ APPROVED</text>
+        <rect
+          x="170"
+          y="400"
+          width="140"
+          height="34"
+          rx="17"
+          fill="#22F89F"
+          opacity="0.12"
+          stroke="#22F89F"
+          stroke-width="1"
+        />
+        <text
+          x="240"
+          y="422"
+          text-anchor="middle"
+          font-family="JetBrains Mono, monospace"
+          font-weight="700"
+          font-size="13"
+          fill="#22F89F"
+        >
+          ✓ APPROVED
+        </text>
       </svg>
     </div>
   </section>
@@ -72,30 +180,67 @@
     <div class="section-head">
       <span class="eyebrow">How it works</span>
       <h2>One application, two independent verdicts.</h2>
-      <p>Every input you enter is scored by both models in parallel, so you can compare a linear, probability-driven view against a rule-based decision tree — and see exactly where they agree.</p>
+      <p>
+        Every input you enter is scored by both models in parallel, so you can
+        compare a linear, probability-driven view against a rule-based decision
+        tree and see exactly where they agree.
+      </p>
     </div>
 
     <div class="feature-grid">
       <div class="feature-card">
         <div class="icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 17L9 11L13 15L21 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M3 17L9 11L13 15L21 7"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </div>
         <h3>Logistic Regression</h3>
-        <p>A calibrated, probability-first model trained on SMOTE-balanced data — best for a smooth, continuous risk read.</p>
+        <p>
+          A calibrated, probability-first model trained on SMOTE-balanced data —
+          best for a smooth, continuous risk read.
+        </p>
       </div>
       <div class="feature-card">
         <div class="icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3V9M12 9L6 15M12 9L18 15M6 15V21M18 15V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M12 3V9M12 9L6 15M12 9L18 15M6 15V21M18 15V21"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </div>
         <h3>Decision Tree</h3>
-        <p>A depth-capped, rule-based classifier that mirrors how an underwriter actually splits decisions.</p>
+        <p>
+          A depth-capped, rule-based classifier that mirrors how an underwriter
+          actually splits decisions.
+        </p>
       </div>
       <div class="feature-card">
         <div class="icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 19V5M4 19H20M4 19L9 12L13 15L20 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M4 19V5M4 19H20M4 19L9 12L13 15L20 7"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </div>
         <h3>Full Dataset Transparency</h3>
-        <p>Explore the 20,000-record training set and its distributions yourself in the Data Overview and EDA tabs.</p>
+        <p>
+          Explore the 20,000-record training set and its distributions yourself
+          in the Data Overview and EDA tabs.
+        </p>
       </div>
     </div>
   </section>

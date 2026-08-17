@@ -1,24 +1,31 @@
-{% extends "base.html" %}
-{% block title %}Prediction — LoanGen AI{% endblock %}
-
+{% extends "base.html" %} {% block title %}Prediction — LoanGen AI{% endblock %}
 {% block content %}
 <div class="container">
   <div class="page-head">
     <span class="eyebrow">● Prediction Engine</span>
     <h1>Check a loan application.</h1>
-    <p>Choose a model, fill in the applicant's financial profile, and get an instant approval probability.</p>
+    <p>
+      Choose a model, fill in the applicant's financial profile, and get an
+      instant approval probability.
+    </p>
   </div>
 
   <div class="model-select" id="modelSelect">
     <div class="model-card selected" data-model="logistic">
-      <span class="tag">Model A</span>
+      <span class="tag">Model A - Recommended</span>
       <h3>Logistic Regression</h3>
-      <p>Probability-calibrated linear classifier, trained on SMOTE-balanced data with 41 features.</p>
+      <p>
+        Probability-calibrated linear classifier, trained on SMOTE-balanced data
+        with 41 features.
+      </p>
     </div>
     <div class="model-card" data-model="tree">
       <span class="tag">Model B</span>
       <h3>Decision Tree</h3>
-      <p>Rule-based classifier (max depth 8) that splits applicants the way an underwriter would.</p>
+      <p>
+        Rule-based classifier (max depth 8) that splits applicants the way an
+        underwriter would.
+      </p>
     </div>
   </div>
 
@@ -28,8 +35,21 @@
       <div class="field-grid">
         {% for field, label, unit, min_v, max_v in numeric_fields %}
         <div class="field">
-          <label for="f_{{ field }}">{{ label }}{% if unit %} <span style="color:var(--text-faint)">({{ unit }})</span>{% endif %}</label>
-          <input type="number" step="any" id="f_{{ field }}" name="{{ field }}" min="{{ min_v }}" max="{{ max_v }}" placeholder="{{ min_v }} – {{ max_v }}" required>
+          <label for="f_{{ field }}"
+            >{{ label }}{% if unit %}
+            <span style="color: var(--text-faint)">({{ unit }})</span>{% endif
+            %}</label
+          >
+          <input
+            type="number"
+            step="any"
+            id="f_{{ field }}"
+            name="{{ field }}"
+            min="{{ min_v }}"
+            max="{{ max_v }}"
+            placeholder="{{ min_v }} – {{ max_v }}"
+            required
+          />
         </div>
         {% endfor %}
       </div>
@@ -49,22 +69,40 @@
       </div>
 
       <div class="submit-row">
-        <button type="submit" class="btn btn-primary" id="submitBtn">Predict Approval →</button>
+        <button type="submit" class="btn btn-primary" id="submitBtn">
+          Predict Approval →
+        </button>
       </div>
     </div>
 
     <aside class="result-panel">
       <h3>Result</h3>
       <div id="resultEmpty" class="result-empty">
-        Fill in the form and click <strong style="color:var(--text-dim)">Predict Approval</strong> to see the model's verdict here.
+        Fill in the form and click
+        <strong style="color: var(--text-dim)">Predict Approval</strong> to see
+        the model's verdict here.
       </div>
 
-      <div id="resultBody" style="display:none;">
+      <div id="resultBody" style="display: none">
         <div class="gauge-wrap">
           <svg viewBox="0 0 220 130">
-            <path d="M15 115 A95 95 0 0 1 205 115" stroke="#2a2a2a" stroke-width="16" stroke-linecap="round" fill="none"/>
-            <path id="gaugeArc" d="M15 115 A95 95 0 0 1 205 115" stroke="#22F89F" stroke-width="16" stroke-linecap="round" fill="none"
-                  stroke-dasharray="298" stroke-dashoffset="298"/>
+            <path
+              d="M15 115 A95 95 0 0 1 205 115"
+              stroke="#2a2a2a"
+              stroke-width="16"
+              stroke-linecap="round"
+              fill="none"
+            />
+            <path
+              id="gaugeArc"
+              d="M15 115 A95 95 0 0 1 205 115"
+              stroke="#22F89F"
+              stroke-width="16"
+              stroke-linecap="round"
+              fill="none"
+              stroke-dasharray="298"
+              stroke-dashoffset="298"
+            />
           </svg>
           <div class="gauge-value">
             <div class="pct" id="gaugePct">0%</div>
@@ -86,8 +124,6 @@
     </aside>
   </form>
 </div>
-{% endblock %}
-
-{% block scripts %}
+{% endblock %} {% block scripts %}
 <script src="{{ url_for('static', filename='js/prediction.js') }}"></script>
 {% endblock %}
